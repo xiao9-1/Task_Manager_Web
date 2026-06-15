@@ -23,4 +23,19 @@ export class AuthService {
       withCredentials: true
     });
   }
+
+  getMe() {
+    return this.http.get(
+      `${this.baseUrl}/me`,
+      { withCredentials: true }
+    );
+  }
+
+  logout() {
+    return this.http.post(
+      'http://localhost:8080/logout',
+      {},
+      { withCredentials: true }
+    );
+  }
 }
