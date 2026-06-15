@@ -17,28 +17,39 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+
+    this.authService.getMe().subscribe({
+      next: () => {
+        this.router.navigate(['/tasks']);
+      },
+      error: () => {
+      }
+    });
+  }
+
   login() {
     this.authService.login(this.email, this.password)
       .subscribe({
         next: () => {
-          console.log('LOGIN SUCCESS');
+          console.log('Успешный вход! email =', this.email);
           this.router.navigate(['/tasks']);
         },
         error: () => {
-          alert('Invalid credentials');
+          alert('Ошибка входа. Неверный логин или пароль');
         }
       });
   }
 
-  loadTasks() {
-    this.authService.getTasks()
-      .subscribe({
-        next: (res) => {
-          console.log('TASKS:', res);
-        },
-        error: (err) => {
-          console.log('TASKS ERROR:', err);
-        }
-      });
-  }
+  // loadTasks() {
+  //   this.authService.getTasks()
+  //     .subscribe({
+  //       next: (res) => {
+  //         console.log('TASKS:', res);
+  //       },
+  //       error: (err) => {
+  //         console.log('TASKS ERROR:', err);
+  //       }
+  //     });
+  // }
 }
