@@ -1,0 +1,46 @@
+<h2>Tasks</h2>
+
+<div *ngIf="user">
+  <p>ID: {{ user.id }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Name: {{ user.name }}</p>
+  <p>Role: {{ user.role}}</p>
+</div>
+
+<button (click)="logout()">
+  Logout
+</button>
+
+<h2>Tasks</h2>
+
+<div *ngFor="let task of tasks" class="task-card">
+
+  <p><b>ID:</b> {{ task.id }}</p>
+  <p><b>Title:</b> {{ task.title }}</p>
+  <p><b>Status:</b> {{ task.status }}</p>
+
+  <p><b>Due Time:</b> {{ task.dueTime }}</p>
+
+  <p *ngIf="'createdAt' in task">
+    <b>Created At:</b> {{ task.createdAt ?? '—' }}
+  </p>
+
+  <p *ngIf="'completedAt' in task">
+    <b>Completed At:</b> {{ task.completedAt ?? '—' }}
+  </p>
+
+  <p>
+    <b>User ID:</b> {{ task.userId ?? '—' }}
+  </p>
+
+  <p>
+    <b>Rating:</b> {{ task.rating ?? '—' }}
+  </p>
+
+  <p *ngIf="'projectId' in task">
+    <b>Project ID:</b> {{ task.projectId ?? '—' }}
+  </p>
+
+  <hr />
+
+</div>
