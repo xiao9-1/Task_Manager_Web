@@ -10,7 +10,8 @@ import {AdminTasksService} from './adminTasks.service';
   selector: 'app-tasks',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './adminTasks.component.html'
+  templateUrl: './adminTasks.component.html',
+  styleUrl: './AdminTasks.component.css'
 })
 export class AdminTasksComponent {
 
