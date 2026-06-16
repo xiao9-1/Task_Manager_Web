@@ -10,7 +10,8 @@ import {UserTasksService} from './userTasks.service';
   selector: 'app-tasks',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './userTasks.component.html'
+  templateUrl: './userTasks.component.html',
+  styleUrl: 'userTasks.component.css'
 })
 export class UserTasksComponent {
 

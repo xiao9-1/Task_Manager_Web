@@ -1,46 +1,67 @@
-<h2>Tasks</h2>
+<div class="tasks-page">
 
-<div *ngIf="user">
-  <p>ID: {{ user.id }}</p>
-  <p>Email: {{ user.email }}</p>
-  <p>Name: {{ user.name }}</p>
-  <p>Role: {{ user.role}}</p>
-</div>
+  <div class="top-bar">
+    <div class="title">Task Manager</div>
 
-<button (click)="logout()">
-  Logout
-</button>
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+  </div>
 
-<h2>Tasks</h2>
+  <div class="user-card" *ngIf="user">
+    <p><b>ID:</b> {{ user.id }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Name:</b> {{ user.name }}</p>
+    <p><b>Role:</b> {{ user.role }}</p>
+  </div>
 
-<div *ngFor="let task of tasks" class="task-card">
+  <h2 class="section-title">Tasks</h2>
 
-  <p><b>ID:</b> {{ task.id }}</p>
-  <p><b>Title:</b> {{ task.title }}</p>
-  <p><b>Status:</b> {{ task.status }}</p>
+  <div *ngFor="let task of tasks" class="task-card">
 
-  <p><b>Due Time:</b> {{ task.dueTime }}</p>
+    <div class="task-header">
+      <span>#{{ task.id }}</span>
 
-  <p *ngIf="'createdAt' in task">
-    <b>Created At:</b> {{ task.createdAt ?? '—' }}
-  </p>
+      <span class="status" [ngClass]="task.status">
+        {{ task.status }}
+      </span>
+    </div>
 
-  <p *ngIf="'completedAt' in task">
-    <b>Completed At:</b> {{ task.completedAt ?? '—' }}
-  </p>
+    <div class="task-title">
+      {{ task.title }}
+    </div>
 
-  <p>
-    <b>User ID:</b> {{ task.userId ?? '—' }}
-  </p>
+    <div class="task-info">
 
-  <p>
-    <b>Rating:</b> {{ task.rating ?? '—' }}
-  </p>
+      <p>
+        <b>Due:</b>
+        {{ task.dueTime ? (task.dueTime | date:'dd.MM.yyyy HH:mm') : '—' }}
+      </p>
 
-  <p *ngIf="'projectId' in task">
-    <b>Project ID:</b> {{ task.projectId ?? '—' }}
-  </p>
+      <p>
+        <b>Created:</b>
+        {{ task.createdAt ? (task.createdAt | date:'dd.MM.yyyy HH:mm') : '—' }}
+      </p>
 
-  <hr />
+      <p>
+        <b>Completed:</b>
+        {{ task.completedAt ? (task.completedAt | date:'dd.MM.yyyy HH:mm') : '—' }}
+      </p>
+
+      <p>
+        <b>User:</b> {{ task.userId ?? '—' }}
+      </p>
+
+      <p>
+        <b>Rating:</b> {{ task.rating ?? '—' }}
+      </p>
+
+      <p>
+        <b>Project:</b> {{ task.projectId ?? '—' }}
+      </p>
+
+    </div>
+
+  </div>
 
 </div>
