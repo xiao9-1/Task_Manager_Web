@@ -1,20 +1,28 @@
-<h2>Login</h2>
+<div class="login-page">
 
-<form (ngSubmit)="login()">
+  <div class="login-header">
+    Task Manager
+  </div>
 
-  <input
-    name="email"
-    [(ngModel)]="email"
-    placeholder="email"
-  />
+  <div class="login-card">
 
-  <input
-    name="password"
-    type="password"
-    [(ngModel)]="password"
-    placeholder="password"
-  />
+    <h2>Login</h2>
 
-  <button type="submit">Login</button>
+    <form (ngSubmit)="login()">
 
-</form>
+      <input name="email" [(ngModel)]="email" placeholder="email" />
+
+      <input name="password" type="password" [(ngModel)]="password" placeholder="password" />
+
+      <div *ngIf="errorMessage" class="error-box">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit">Login</button>
+
+    </form>
+
+
+  </div>
+
+</div>

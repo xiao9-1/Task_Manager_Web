@@ -8,12 +8,15 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
   email: string = '';
   password: string = '';
+
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -29,6 +32,13 @@ export class LoginComponent {
   }
 
   login() {
+
+    if (!this.email?.trim() || !this.password?.trim()) {
+      this.errorMessage = 'Заполните все поля';
+      return;
+    }
+
+    this.errorMessage = '';
     this.authService.login(this.email, this.password)
       .subscribe({
         next: () => {
@@ -36,20 +46,8 @@ export class LoginComponent {
           this.router.navigate(['/tasks']);
         },
         error: () => {
-          alert('Ошибка входа. Неверный логин или пароль');
+          this.errorMessage = 'Неверный логин или пароль';
         }
       });
   }
-
-  // loadTasks() {
-  //   this.authService.getTasks()
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log('TASKS:', res);
-  //       },
-  //       error: (err) => {
-  //         console.log('TASKS ERROR:', err);
-  //       }
-  //     });
-  // }
 }
