@@ -6,6 +6,7 @@ export interface UserTask {
 
   dueTime: string;
   completedAt: string | null;
+  createdAt : string;
   rating: number;
   projectId: number | null;
 }
