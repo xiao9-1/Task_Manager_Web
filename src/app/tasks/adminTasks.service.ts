@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {AdminTask} from '../models/adminTask.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AdminTasksService {
   constructor(private http: HttpClient) {}
 
   getAdminTasks() {
-    return this.http.get<any[]>(
+    return this.http.get<AdminTask[]>(
       `${this.baseUrl}/admin/tasks`,
       { withCredentials: true }
     );
