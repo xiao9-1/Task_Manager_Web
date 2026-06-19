@@ -42,8 +42,12 @@ export class AuthService {
     );
   }
 
-  setUser(user: User) {
+  setUser(user: User | null) {
     this.userSubject.next(user);
+  }
+
+  getUser() {
+    return this.user$;
   }
 
 }
