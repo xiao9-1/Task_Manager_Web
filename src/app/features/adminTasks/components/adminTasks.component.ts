@@ -54,6 +54,7 @@ export class AdminTasksComponent {
   }
 
   loadTasks() {
+    console.log('Загрузка задач администратора');
     this.tasksService.getAdminTasks().subscribe(data => {
       this.userTasks = [];
       this.adminTasks = data;
