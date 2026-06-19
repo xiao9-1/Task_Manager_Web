@@ -55,6 +55,7 @@ export class UserTasksComponent {
   }
 
   loadTasks() {
+    console.log('Загрузка задач пользователя');
     this.tasksService.getUserTasks().subscribe(data => {
       this.adminTasks = [];
       this.userTasks = data;

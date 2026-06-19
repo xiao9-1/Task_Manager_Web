@@ -29,6 +29,8 @@ export class TasksComponent {
       this.mode = mode === 'admin'
         ? Roles.ADMIN
         : Roles.USER;
+
+      console.log('Режим:', this.mode)
     });
   }
 
