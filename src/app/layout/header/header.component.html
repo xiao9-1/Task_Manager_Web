@@ -1,0 +1,32 @@
+<div class="top-bar">
+
+  <div class="title">Task Manager</div>
+
+  <div class="center">
+    <button class="mode-btn" (click)="setMode(Roles.USER)">
+      User
+    </button>
+
+    <button class="mode-btn"
+            *ngIf="(user$ | async)?.role === 'ADMIN'"
+            (click)="setMode(Roles.ADMIN)">
+      Admin
+    </button>
+  </div>
+
+  <div class="right">
+
+    <div class="user-info" *ngIf="user$ | async as user">
+      <div>Id: {{ user.id }}</div>
+      <div>Name: {{ user.name }}</div>
+      <div>Email: {{ user.email }}</div>
+      <div>Role: {{ user.role }}</div>
+    </div>
+
+    <button class="logout-btn" (click)="onLogout()">
+      Logout
+    </button>
+
+  </div>
+
+</div>
