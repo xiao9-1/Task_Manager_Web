@@ -21,7 +21,21 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    this.authService.getMe().subscribe({
+      next: () => {
+        console.log('Пользователь уже авторизован! Возрат к /tasks')
+        this.router.navigate(['/tasks']);
+      },
+      error: () => {
+        console.log('Пользователь не авторизован!')
+        // остаёмся на login
+      }
+    });
+  }
+
   login() {
+    console.log('Попытка авторизации пользователя с email:', this.email)
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
         this.loadUser();
@@ -36,6 +50,6 @@ export class LoginComponent {
     this.authService.getMe().subscribe(user => {
       this.authService.setUser(user);
       this.router.navigate(['/tasks']);
-    });
-  }
+    }
+  );}
 }
