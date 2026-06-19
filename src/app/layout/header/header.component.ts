@@ -27,8 +27,7 @@ export class HeaderComponent {
     this.router.navigate([], {
       queryParams: {
         mode: mode === Roles.ADMIN ? 'admin' : 'user'
-      },
-      queryParamsHandling: 'merge'
+      }
     });
   }
 
@@ -37,9 +36,16 @@ export class HeaderComponent {
   }
 
   onLogout() {
-    this.authService.logout().subscribe(() => {
-      this.modeService.setMode(Roles.USER);
-      this.router.navigate(['/login']);
+    console.log('Выход из системы');
+    this.authService.setUser(null);
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.router.navigate(['/login']);
+      }
     });
   }
 
