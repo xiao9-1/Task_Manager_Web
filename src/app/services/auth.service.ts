@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {User} from '../models/user.model';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,14 @@ export class AuthService {
 
   private baseUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.getMe().subscribe({
+      next: user => this.setUser(user)
+    });
+  }
 
   login(email: string, password: string) {
     return this.http.post(
@@ -18,14 +27,8 @@ export class AuthService {
     );
   }
 
-  getTasks() {
-    return this.http.get('http://localhost:8080/tasks', {
-      withCredentials: true
-    });
-  }
-
   getMe() {
-    return this.http.get(
+    return this.http.get<User>(
       `${this.baseUrl}/me`,
       { withCredentials: true }
     );
@@ -38,4 +41,9 @@ export class AuthService {
       { withCredentials: true }
     );
   }
+
+  setUser(user: User) {
+    this.userSubject.next(user);
+  }
+
 }
