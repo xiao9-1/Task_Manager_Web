@@ -1,0 +1,28 @@
+<div class="login-page">
+
+  <div class="login-header">
+    Task Manager
+  </div>
+
+  <div class="login-card">
+
+    <h2>Login</h2>
+
+    <form (ngSubmit)="login()">
+
+      <input name="email" [(ngModel)]="email" placeholder="email" />
+
+      <input name="password" type="password" [(ngModel)]="password" placeholder="password" />
+
+      <div *ngIf="errorMessage" class="error-box">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit">Login</button>
+
+    </form>
+
+
+  </div>
+
+</div>
